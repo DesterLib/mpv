@@ -8,7 +8,9 @@
     "demo": "electronmon demo",
     "build:pre": "rd /s /q prebuilds || exit 0",
     "build": "npm run build:pre && prebuild -t 93 -a x64 && npm run build:post",
-    "build:post": "robocopy libraries/libmpv build/Release mpv-1.dll || exit 0"
+    "build:post": "robocopy libraries/libmpv build/Release mpv-1.dll || exit 0",
+    "publish:pre": "mkdir dist && robocopy build/Release dist mpv-1.dll mpvjs.node || exit 0",
+    "publish": "npm run build && npm run publish:pre && npm publish"
   },
   "dependencies": {
     "prebuild-install": "^5.0.0",
@@ -23,10 +25,6 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DesterLib/mpv.git"
-  },
   "contributors": [
     {
       "name": "Elias Benbourenane",
@@ -38,6 +36,13 @@
       "url": "https://github.com/Kagami"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DesterLib/mpv.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "index.js",
   "_from": ""
 }

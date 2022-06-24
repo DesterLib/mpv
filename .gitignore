@@ -4,3 +4,4 @@ build/
 prebuilds/
 scripts/dist/
 libraries/
+dist/
