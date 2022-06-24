@@ -15,8 +15,8 @@
 #include <ppapi/cpp/graphics_3d.h>
 #include <ppapi/lib/gl/gles2/gl2ext_ppapi.h>
 #include <ppapi/utility/completion_callback_factory.h>
-#include <mpv/client.h>
-#include <mpv/render_gl.h>
+#include <client.h>
+#include <render_gl.h>
 
 // Fix for MSVS.
 #ifdef PostMessage
