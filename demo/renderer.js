@@ -1,6 +1,6 @@
 const path = require("path");
 const React = require("react");
-const ReactDOM = require("react-dom");
+const ReactDOM = require("react-dom/client");
 const { remote } = require("electron");
 const { ReactMPV } = require("../index");
 
@@ -39,7 +39,10 @@ class Main extends React.PureComponent {
     const observe = mpv.observe.bind(mpv);
     ["pause", "time-pos", "duration", "eof-reached"].forEach(observe);
     this.mpv.property("hwdec", "auto");
-    this.mpv.command("loadfile", path.join(__dirname, "..", "libraries", "video.mkv"));
+    this.mpv.command(
+      "loadfile",
+      path.join(__dirname, "..", "libraries", "video.mkv")
+    );
   }
   handlePropertyChange(name, value) {
     if (name === "time-pos" && this.seeking) {
@@ -107,7 +110,19 @@ class Main extends React.PureComponent {
             {this.state.pause ? "▶" : "❚❚"}
           </button>
           <button className="control" onClick={this.handleStop}>
-            ■
+            ◼️
+          </button>
+          <button
+            className="control"
+            onClick={() => this.mpv.command("keypress", "j")}
+          >
+            Sub
+          </button>
+          <button
+            className="control"
+            onClick={() => this.mpv.command("keypress", "#")}
+          >
+            Audio
           </button>
           <input
             className="seek"
@@ -129,4 +144,4 @@ class Main extends React.PureComponent {
   }
 }
 
-ReactDOM.render(<Main />, document.getElementById("root"));
+ReactDOM.createRoot(document.getElementById("root")).render(<Main />);

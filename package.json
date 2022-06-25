@@ -1,6 +1,6 @@
 {
   "name": "@desterlib/mpv",
-  "version": "0.34.3",
+  "version": "0.34.4",
   "description": "Dester's mpv video plugin",
   "license": "MIT",
   "scripts": {
@@ -9,21 +9,20 @@
     "build:pre": "rd /s /q prebuilds || exit 0",
     "build": "npm run build:pre && prebuild -t 93 -a x64 && npm run build:post",
     "build:post": "robocopy libraries/libmpv build/Release mpv-1.dll || exit 0",
-    "publish:pre": "(rd /s /q dist || exit 0) && mkdir dist && robocopy build/Release dist mpv-1.dll mpvjs.node || exit 0",
-    "publish": "npm run build && npm run publish:pre && npm publish"
+    "release:pre": "(rd /s /q dist || exit 0) && mkdir dist && robocopy build/Release dist mpv-1.dll mpvjs.node || exit 0",
+    "release": "npm run build && npm run release:pre && npm publish"
   },
   "dependencies": {
-    "prebuild-install": "^5.0.0",
+    "prebuild-install": "^7.1.1",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "babel-standalone": "^6.26.0",
     "electron": "^3.1.13",
     "electronmon": "^2.0.2",
     "node-abi": "^3.22.0",
-    "prebuild": "^10.0.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "prebuild": "^11.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "contributors": [
     {
