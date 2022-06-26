@@ -4,18 +4,33 @@
   "description": "Dester's mpv video plugin",
   "license": "MIT",
   "scripts": {
-    "install" : "echo",
+    "install": "echo",
     "demo": "electronmon demo",
-    "build:pre": "rd /s /q dist || exit 0",
-    "build": "npm run build:pre && node-gyp rebuild && npm run build:post",
-    "build:post": "robocopy libraries/libmpv/win build/Release mpv-1.dll || exit 0",
-    "release:pre": "robocopy build/Release dist mpv-1.dll mpvjs.node || exit 0",
-    "release": "npm run build && npm run release:pre && npm publish"
+    "build": "cross-os build:pre && node-gyp rebuild && cross-os build:post",
+    "release": "npm run build && cross-os release:pre && npm publish"
+  },
+  "cross-os": {
+    "build:pre": {
+      "darwin": "rm -rf dist",
+      "linux": "rm -rf dist",
+      "win32": "rd /s /q dist || exit 0"
+    },
+    "build:post": {
+      "darwin": "cp libraries/win/mpv/mpv-1.dll build/Release",
+      "linux": "cp libraries/win/mpv/mpv-1.dll build/Release",
+      "win32": "robocopy libraries/win/mpv build/Release mpv-1.dll || exit 0"
+    },
+    "release:pre": {
+      "darwin": "mkdir dist && cp build/Release/mpv-1.dll dist && cp build/Release/mpv.node dist",
+      "linux": "mkdir dist && cp build/Release/mpv-1.dll dist && cp build/Release/mpv.node dist",
+      "win32": "robocopy build/Release dist mpv-1.dll mpv.node || exit 0"
+    }
   },
   "dependencies": {
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
+    "cross-os": "^1.5.0",
     "electron": "^3.1.13",
     "electronmon": "^2.0.2",
     "node-abi": "^3.22.0",

@@ -1,7 +1,7 @@
 {
     "targets": [
         {
-            "target_name": "mpvjs",
+            "target_name": "mpv",
             "win_delay_load_hook": "false",
             "sources": ["index.cc"],
             "conditions": [
