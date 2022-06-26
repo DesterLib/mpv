@@ -1,2 +1,2 @@
 # mpv
-Dester's mpv video plugin
+Dester's mpv plugin

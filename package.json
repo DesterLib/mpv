@@ -1,59 +1,68 @@
 {
-  "name": "@desterlib/mpv",
-  "version": "0.34.6",
-  "description": "Dester's mpv video plugin",
-  "license": "MIT",
-  "scripts": {
-    "install": "echo",
-    "demo": "electronmon demo",
-    "build": "cross-os build:pre && node-gyp rebuild && cross-os build:post",
-    "release": "npm run build && cross-os release:pre && npm publish"
-  },
-  "cross-os": {
-    "build:pre": {
-      "darwin": "rm -rf dist",
-      "linux": "rm -rf dist",
-      "win32": "rd /s /q dist || exit 0"
+    "name": "@desterlib/mpv",
+    "version": "0.34.6",
+    "description": "Dester's mpv video plugin",
+    "license": "MIT",
+    "scripts": {
+        "install": "echo",
+        "demo": "electronmon demo",
+        "build": "cross-os build:pre && node-gyp rebuild && cross-os build:post",
+        "release": "npm run build && cross-os release:pre && npm publish",
+        "lint:check": "eslint demo/*.{js,jsx,ts,tsx,json} index.js",
+        "lint:fix": "eslint --fix demo/*.{js,jsx,ts,tsx,json} index.js",
+        "lint:format": "prettier --write demo/*.{js,jsx,ts,tsx,css,md,json} index.js .eslintrc.json .prettierrc.json package.json --config .prettierrc.json"
     },
-    "build:post": {
-      "darwin": "cp libraries/win/mpv/mpv-1.dll build/Release",
-      "linux": "cp libraries/win/mpv/mpv-1.dll build/Release",
-      "win32": "robocopy libraries/win/mpv build/Release mpv-1.dll || exit 0"
+    "cross-os": {
+        "build:pre": {
+            "darwin": "rm -rf dist",
+            "linux": "rm -rf dist",
+            "win32": "rd /s /q dist || exit 0"
+        },
+        "build:post": {
+            "darwin": "cp libraries/win/mpv/mpv-1.dll build/Release",
+            "linux": "cp libraries/win/mpv/mpv-1.dll build/Release",
+            "win32": "robocopy libraries/win/mpv build/Release mpv-1.dll || exit 0"
+        },
+        "release:pre": {
+            "darwin": "mkdir dist && cp build/Release/mpv-1.dll dist && cp build/Release/mpv.node dist",
+            "linux": "mkdir dist && cp build/Release/mpv-1.dll dist && cp build/Release/mpv.node dist",
+            "win32": "robocopy build/Release dist mpv-1.dll mpv.node || exit 0"
+        }
     },
-    "release:pre": {
-      "darwin": "mkdir dist && cp build/Release/mpv-1.dll dist && cp build/Release/mpv.node dist",
-      "linux": "mkdir dist && cp build/Release/mpv-1.dll dist && cp build/Release/mpv.node dist",
-      "win32": "robocopy build/Release dist mpv-1.dll mpv.node || exit 0"
-    }
-  },
-  "dependencies": {
-    "prop-types": "^15.8.1"
-  },
-  "devDependencies": {
-    "cross-os": "^1.5.0",
-    "electron": "^3.1.13",
-    "electronmon": "^2.0.2",
-    "node-abi": "^3.22.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "contributors": [
-    {
-      "name": "Elias Benbourenane",
-      "email": "me@elias.eu.org",
-      "url": "https://elias.eu.org"
+    "dependencies": {
+        "prop-types": "^15.8.1"
     },
-    {
-      "name": "Kagami Hiiragi",
-      "url": "https://github.com/Kagami"
-    }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DesterLib/mpv.git"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "main": "index.js"
+    "devDependencies": {
+        "@trivago/prettier-plugin-sort-imports": "^3.2.0",
+        "cross-os": "^1.5.0",
+        "electron": "^3.1.13",
+        "electronmon": "^2.0.2",
+        "eslint": "^8.18.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-react": "^7.30.1",
+        "node-abi": "^3.22.0",
+        "prettier": "^2.7.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
+    "contributors": [
+        {
+            "name": "Elias Benbourenane",
+            "email": "me@elias.eu.org",
+            "url": "https://elias.eu.org"
+        },
+        {
+            "name": "Kagami Hiiragi",
+            "url": "https://github.com/Kagami"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DesterLib/mpv.git"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "main": "index.js"
 }

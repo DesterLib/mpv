@@ -3,5 +3,4 @@ npm-debug.log
 build/
 prebuilds/
 scripts/dist/
-libraries/
 dist/
