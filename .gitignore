@@ -1,6 +1,4 @@
-node_modules/
+/node_modules
+/build
+/dist
 npm-debug.log
-build/
-prebuilds/
-scripts/dist/
-dist/

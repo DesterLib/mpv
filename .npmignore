@@ -1,5 +1,6 @@
-build/
-demo/
-libraries/
-node_modules/
-prebuilds/
+/build
+/demo
+/libraries
+/node_modules
+binding.gyp
+index.cc

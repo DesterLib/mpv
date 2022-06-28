@@ -1,6 +1,6 @@
 {
     "name": "@desterlib/mpv",
-    "version": "0.34.9",
+    "version": "0.34.12",
     "description": "Dester's mpv video plugin",
     "license": "MIT",
     "scripts": {
